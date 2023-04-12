@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Style Binding</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+  </head>
+  <body>
+    <div id="app">
+        <div v-bind:style="objectBackground">
+            <label for="">FirstName : {{ firstName }}</label>
+            <br />
+            <input v-model="firstName" type="text" name="firstName" />
+            <button v-on:click="changeActive()">Change Active</button>
+            <!-- Binding HTML Class: Object Syntax -->
+            <!-- Cách 1 -->
+            <div class="demo" v-bind:class="{active: isActive, error: isError}"></div>
+            <!-- Cách 2  -->
+            <div class="demo" v-bind:class="objectClass"></div>
+            <hr />
+            <!-- Binding Inline Styles: Object Syntax -->
+            <!-- Cách 1 -->
+            <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px', paddingTop: paddingTop + 'px' }">
+              Test Binding Inline Styles
+            </div>
+          <!-- Cách 2 -->
+            <div v-bind:style="styleObjectClass">
+              Test Binding Inline Styles
+            </div>
+          </div>
+        </div>
+     
+  </body>
+  <script>
+    var vueInstance = new Vue({
+      el: "#app",
+      data: {
+        firstName: "Pham Thanh Nam",
+        isActive: true,
+        isError: true,
+
+        activeColor: "red",
+        fontSize: 12,
+        paddingTop: 20,
+        bg: "https://2.bp.blogspot.com/-C8vnMOJVWRI/XIkaFbYfEcI/AAAAAAAAAgo/FIBvarQjNwwTVb5OPnpRhUjTU1lcnuQMwCKgBGAs/w919/anime-scenery-sunset-uhdpaper.com-4K-112.jpg"
+      },
+      methods: {
+        changeActive() {
+          this.isActive = !this.isActive;
+        },
+      },
+      computed: {
+        objectClass: function () {
+          return {
+            active: this.isActive,
+            error: this.isError,
+          };
+        },
+        styleObjectClass: function () {
+          return {
+            color: this.activeColor,
+            fontSize: this.fontSize + "px",
+            paddingTop: this.paddingTop + "px",
+          };
+        },
+        background: function(){
+            return 'url(' +this.bg+')';
+        },
+        objectBackground: function(){
+            return {background: this.background, height: 500 +'px'};
+        }
+      },
+    });
+  </script>
+</html>

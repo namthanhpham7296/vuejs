@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+</head>
+<style>
+    .tabs{
+        margin: 0;
+        padding: 0;
+    }
+
+    .tabs li{
+        display: inline-block;
+        padding: 10px 15px;
+        border: 1px solid #000;
+    }
+
+    .login, .register{
+        border: 1px solid rgb(204, 35, 195);
+        padding: 10px 10px;
+    }
+</style>
+<body>
+    <div id="app">
+        <ul class="tabs">
+            <li v-on:click="changeTabs('login')">Login</li> 
+            <li v-on:click="changeTabs('register')">Register</li>
+        </ul>
+        <!-- Sử dụng v-if v-else -->
+        <div class="login" v-if="tabSelected === 'login'">
+            <h1>Login</h1>
+            <form action="">
+                <input type="text" name="email" placeholder="Input email">
+                <input type="password" name="password" placeholder="Input password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    
+        <div class="register" v-else>
+            <h1>Register</h1>
+            <form action="">
+                <input type="text" name="fullname" placeholder="Input full name">
+                <input type="text" name="email" placeholder="Input email">
+                <input type="password" name="password" placeholder="Input password">
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <!-- Sử dụng v-show -->
+        <div class="login" v-show="tabSelected === 'login'">
+            <h1>Login</h1>
+            <form action="">
+                <input type="text" name="email" placeholder="Input email">
+                <input type="password" name="password" placeholder="Input password">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    
+        <div class="register" v-show="tabSelected === 'register'">
+            <h1>Register</h1>
+            <form action="">
+                <input type="text" name="fullname" placeholder="Input full name">
+                <input type="text" name="email" placeholder="Input email">
+                <input type="password" name="password" placeholder="Input password">
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+   
+</body>
+<script>
+  var vueInstance = new Vue({
+      el: "#app",
+      data: {
+        tabSelected: 'login'
+      },
+      methods: {
+            changeTabs(tab){
+                this.tabSelected = tab;
+            }
+      },
+      computed: {
+       
+      },
+    });
+</script>
+</html>

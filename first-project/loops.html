@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Rendering</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+</head>
+<style>
+    .list-blog{
+        display: flex;
+        flex: wrap;
+    }
+    .list-blog .blog{
+        width: 20%;
+        border: 1px solid #000;
+        margin: 0 10px;
+    }
+</style>
+<body>
+    <div id="app">
+        <div class="user" v-for="user in userActive">{{ user.email }}</div>
+        <ul>
+            <li v-for="(value, key) in scores">{{ key }}: {{ value }}</li>
+        </ul>
+        <div class="list-blog">
+            <div v-for="(item, index) in listBlogs" class="blog" v-bind:key="index">
+                <div class="title">STT: {{ index }} - {{ item.title }} </div>
+                <div class="description">{{ item.body }}</div>
+            </div>
+         
+        </div>
+    </div>
+</body>
+<script>
+    var vueInstance = new Vue({
+        el: "#app",
+        data:{
+            arrUser:[
+                {
+                    email: 'namthanhpham72961@gmail.com',
+                    isActive: true,
+                },
+                {
+                    email: 'namthanhpham72962@gmail.com',
+                    isActive: false,
+                },
+                {
+                    email: 'namthanhpham72963@gmail.com',
+                    isActive: false,
+                },
+                {
+                    email: 'namthanhpham72964@gmail.com',
+                    isActive: false,
+                }
+            ],
+            scores:{
+                math: 9.5,
+                science: 10
+            },
+            listBlogs:[
+                {
+                    'userId' : 1,
+                    'id': 1,
+                    'title': "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti",
+                    'body': "Body Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti"
+
+                },
+                {
+                    'userId' : 1,
+                    'id': 2,
+                    'title': "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti",
+                    'body': "Body Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti"
+
+                },
+                {
+                    'userId' : 1,
+                    'id': 3,
+                    'title': "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti",
+                    'body': "Body Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla totam, doloremque perferendis doloribus eligendi officiis fuga. Eaque, quasi. Expedita sed velit rem. Ullam, facilis nihil ipsum rerum asperiores hic corrupti"
+
+                },
+            ]
+        },
+        methods:{
+
+        },
+        computed:{
+            userActive: function(){
+                return this.arrUser.filter(function(e){
+                    return e.isActive;
+                })
+            }
+        }
+    })
+</script>
+</html>

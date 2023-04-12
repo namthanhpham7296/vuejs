@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+</head>
+<style>
+    .box{
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: relative;
+    }
+
+    .box-2{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 0;
+        right: 0;
+        background-color: rgb(0, 255, 234);
+    }
+</style>
+<body>
+    <div id="app">
+        <p>Count: {{ count }}</p>
+        <button v-on:click='handleClick(5, $event)'>Click Me</button>
+        <div class="box" v-on:mousemove="handleMousemove">
+            <p>ClientX: {{ clientX }}</p>
+            <p>ClientY: {{ clientX }}</p>
+            <div class="box-2" v-on:mousemove.stop="handleMousemoveChild"></div>
+        </div>
+
+        <form action="/server.php" method="POST" v-on:submit.prevent="handleSubmitForm">
+            <label for="">Email: </label>
+            <input type="email" name="email">
+            <label for="">Password: </label>
+            <input type="password" name="password">
+            <input type="submit" v-onclick value="Login">
+        </form>
+    </div>
+
+</body>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data: {
+            count: 0,
+            clientX: 0,
+            clientY: 0,
+        },
+        methods: {
+            handleClick(number, event){
+                console.log('click', event.target);
+                return this.count += number;
+            },
+            handleMousemove(e){
+                this.clientX = e.clientX;
+                this.clientY = e.clientY;
+                console.log('Parent:' + e);
+            },
+            handleSubmitForm(e){
+                console.log(e);
+            },
+            handleMousemoveChild(e){
+                console.log('Child:' + e);
+            }
+        }
+    })
+</script>
+</html>
